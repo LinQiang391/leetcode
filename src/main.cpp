@@ -10,9 +10,10 @@
 
 void main() {
 	Solution s;
-	vector<int> vec = { 10,3,8,9,4 };
-	vector<string> res=s.findRelativeRanks(vec);
+	vector<vector<int>> vec = { {1, 2},{3, 4} };
+	/*vector<string> res=s.findRelativeRanks(vec);
 	for (auto i : res) {
 		cout << i << endl;
-	}
+	}*/
+	s.matrixReshape(vec,1,4);
 }
