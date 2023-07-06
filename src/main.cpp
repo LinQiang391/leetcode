@@ -10,10 +10,10 @@
 
 void main() {
 	Solution s;
-	vector<vector<int>> vec = { {1, 2},{3, 4} };
+	vector<int>vec = { 1 };
 	/*vector<string> res=s.findRelativeRanks(vec);
 	for (auto i : res) {
 		cout << i << endl;
 	}*/
-	s.matrixReshape(vec,1,4);
+	s.canPlaceFlowers(vec, 1);
 }

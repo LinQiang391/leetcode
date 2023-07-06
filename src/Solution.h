@@ -17,8 +17,18 @@ using namespace std;
 class Solution {
 public:
     vector<string> findRelativeRanks(vector<int>& score);
+
     int arrayPairSum(vector<int>& nums);
+
     vector<vector<int>> matrixReshape(vector<vector<int>>& mat, int r, int c);
+
     int distributeCandies(vector<int>& candyType);
+
     int findLHS(vector<int>& nums);
+
+    int maxCount(int m, int n, vector<vector<int>>& ops);
+
+    vector<string> findRestaurant(vector<string>& list1, vector<string>& list2);
+
+    bool canPlaceFlowers(vector<int>& flowerbed, int n);
 };
