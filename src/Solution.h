@@ -13,6 +13,7 @@
 #include<vector>
 #include<string>
 #include<unordered_set>
+#include<numeric>
 using namespace std;
 class Solution {
 public:
@@ -31,4 +32,18 @@ public:
     vector<string> findRestaurant(vector<string>& list1, vector<string>& list2);
 
     bool canPlaceFlowers(vector<int>& flowerbed, int n);
+
+    int maximumProduct(vector<int>& nums);
+
+    double findMaxAverage(vector<int>& nums, int k);
+
+    vector<int> findErrorNums(vector<int>& nums);
+
+    vector<vector<int>> imageSmoother(vector<vector<int>>& img);
+
+    int findLengthOfLCIS(vector<int>& nums);
+
+    int calPoints(vector<string>& operations);
+
+    int findShortestSubArray(vector<int>& nums);
 };

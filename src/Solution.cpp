@@ -249,7 +249,238 @@ bool Solution::canPlaceFlowers(vector<int>& flowerbed, int n) {
 int Solution::maximumProduct(vector<int>& nums) {
 	sort(nums.begin(), nums.end());
 	int n = nums.size();
-	return max(nums[n - 1] * nums[n - 2] * nums[n - 3], nums[0] * nums[1] * nums[n - 1]);  //最大乘积的结果只能最大三个数，或者最小两个数和最大的数的乘积
+	return max(nums[n - 1] * nums[n - 2] * nums[n - 3], nums[0] * nums[1] * nums[n - 1]);  //、最大乘积的结果只能最大三个数，或者最小两个数和最大的数的乘积
+}
+
+/**
+ * @brief 题目：643. 子数组最大平均数 I
+ * @url:https://leetcode.cn/problems/maximum-average-subarray-i/
+ * @param nums
+ * @param k
+ * @return 
+ */
+double Solution::findMaxAverage(vector<int>& nums, int k){
+	int n = nums.size();
+	int res = 0;
+	for (int i = 0; i < k; i++) {
+		res += nums[i];
+	}
+	int total = res;
+	for (int i = k; i < n; i++) {
+		total = total- nums[i - k] + nums[i];			///滑动窗口
+		res = max(res, total);
+	}
+	cout << res << endl;
+	return res / (k * 1.0);
 }
 
 
+/**
+ * @brief 题目：645. 错误的集合
+ * @url:https://leetcode.cn/problems/set-mismatch/
+ * @param nums
+ * @return 
+ */
+vector<int> Solution:: findErrorNums(vector<int>& nums) {
+	/*map<int, int>mp;
+	vector<int>res;
+	for (int i = 0; i < nums.size(); i++) {
+		mp[nums[i]]++;
+	}
+	int lost;
+	int overlap;
+	for (int i = 1; i <= nums.size(); i++) {
+		if (mp.find(i) == mp.end()) {
+			lost = i;
+		}
+		if (mp[i] == 2) {
+			overlap = i;
+		}
+	}
+	res.push_back(overlap);
+	res.push_back(lost);
+	return res;*/
+	int nums1 = 0, nums2 = 0;			//位运算优化
+	int xorsum = 0;
+	for (auto item : nums) {
+		xorsum ^= item;
+	}
+	for (int i = 1; i <= nums.size(); i++) {
+		xorsum ^= i;
+	}
+
+	int lowbit = xorsum & (~xorsum + 1);  //取一个数二进制最后一位为1，其余为0的值 等价于xorsum&(-xorsum)		此法可以快速解决一个数组中出现奇数次的两个数。
+	for (auto item : nums) {
+		if ((item & lowbit) == 0) {
+			nums1 ^= item;
+		}
+		else {
+			nums2 ^= item;
+		}
+	}
+	for (int i = 1; i <= nums.size(); i++) {
+		if ((i & lowbit) == 0) {
+			nums1 ^= i;
+		}
+		else {
+			nums2 ^= i;
+		}
+	}
+
+	vector<int>res;
+	for (auto item : nums) {
+		if (item == nums1) {
+			res.push_back(nums1);
+			res.push_back(nums2);
+			return res;
+		}
+	}
+	res.push_back(nums2);
+	res.push_back(nums1);
+	return res;
+
+
+}
+
+/**
+ * @brief 题目：661. 图片平滑器
+ * @url:https://leetcode.cn/problems/image-smoother/
+ * @param img
+ * @return 
+ */
+vector<vector<int>> Solution::imageSmoother(vector<vector<int>>& img){
+
+	int m = img.size();
+	int n = img.front().size();
+	vector<vector<int>>res (m,vector<int>(n));
+	for (int i = 0; i < m; i++) {
+		for (int j = 0; j < n; j++) {
+			int sum = 0;
+			int total = 0;
+			for (int x = i - 1; x <= i + 1; x++) {
+				for (int y = j - 1; y <= j + 1; y++) {
+					if (0 <= x && x <= m - 1 && 0 <= y && y <= n - 1) {
+						sum += img[x][y];
+						total++;
+					}
+				}
+			}
+			res[i][j] = sum / total;
+		}
+	}
+	return res;
+
+}
+
+/**
+ * @brief 题目：674. 最长连续递增序列
+ * @url:https://leetcode.cn/problems/longest-continuous-increasing-subsequence/
+ * @param nums
+ * @return 
+ */
+int Solution::findLengthOfLCIS(vector<int>& nums){
+	vector<int> vec;
+	int res = numeric_limits<int>::min();
+	for (auto item : nums) {
+		if (vec.empty() || vec.back() < item) {
+			vec.push_back(item);
+		}
+		else {
+			res = max(res, (int)vec.size());
+			vec.clear();
+			vec.push_back(item);
+		}
+	}
+	return max(res, (int)vec.size());
+}
+
+/**
+ * @brief 题目：682. 棒球比赛
+ * @url:https://leetcode.cn/problems/baseball-game/
+ * @param operations
+ * @return 
+ */
+int Solution::calPoints(vector<string>& operations) {
+	vector<int> res;
+	int total = 0;
+	for (auto opt : operations) {
+		if (opt == "+") {
+			res.push_back(*(res.end()-1) + *(res.end() - 2));
+		}else if(opt=="C") {
+			res.pop_back();
+		}
+		else if (opt == "D") {
+			res.push_back(res.back() * 2);
+		}
+		else {
+			res.push_back(stoi(opt));
+		}
+	}
+	for (auto item : res) {
+		total += item;
+	}
+	return total;
+}
+
+/**
+ * @brief 题目：697. 数组的度
+ * @url:https://leetcode.cn/problems/degree-of-an-array/
+ * @param nums
+ * @return 
+ */
+int Solution::findShortestSubArray(vector<int>& nums){
+	map<int, int>mp;
+	for (auto num : nums) {
+		mp[num]++;
+	}
+	int degree = 0;
+	for (auto item : mp) {
+		degree = max(degree, item.second);
+	}
+	if (degree == 1) {
+		return degree;
+	}
+	vector<int>target;
+	for (auto item : mp) {
+		if (item.second == degree) {
+			target.push_back(item.first);
+		}
+	}
+	int res = numeric_limits<int>::max();
+	for (auto item : target) {
+		for(auto iter=nums.end()-1;iter!=nums.begin();iter--){
+			if (*iter == item) {
+				int distance = iter - find(nums.begin(), nums.end(), item);
+				res = min(res, distance+1);
+				break;
+			}
+		}
+	}
+	return res;
+
+
+	/* 官方参考，写法优秀
+	unordered_map<int, vector<int>> mp;
+        int n = nums.size();
+        for (int i = 0; i < n; i++) {
+            if (mp.count(nums[i])) {
+                mp[nums[i]][0]++;
+                mp[nums[i]][2] = i;
+            } else {
+                mp[nums[i]] = {1, i, i};
+            }
+        }
+        int maxNum = 0, minLen = 0;
+        for (auto& [_, vec] : mp) {
+            if (maxNum < vec[0]) {
+                maxNum = vec[0];
+                minLen = vec[2] - vec[1] + 1;
+            } else if (maxNum == vec[0]) {
+                if (minLen > vec[2] - vec[1] + 1) {
+                    minLen = vec[2] - vec[1] + 1;
+                }
+            }
+        }
+        return minLen;
+	*/
+}
