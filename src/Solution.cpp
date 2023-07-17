@@ -244,7 +244,7 @@ bool Solution::canPlaceFlowers(vector<int>& flowerbed, int n) {
  * @brief 题目：628. 三个数的最大乘积
  * @url:https://leetcode.cn/problems/maximum-product-of-three-numbers/
  * @param nums
- * @return 
+ * @return
  */
 int Solution::maximumProduct(vector<int>& nums) {
 	sort(nums.begin(), nums.end());
@@ -257,9 +257,9 @@ int Solution::maximumProduct(vector<int>& nums) {
  * @url:https://leetcode.cn/problems/maximum-average-subarray-i/
  * @param nums
  * @param k
- * @return 
+ * @return
  */
-double Solution::findMaxAverage(vector<int>& nums, int k){
+double Solution::findMaxAverage(vector<int>& nums, int k) {
 	int n = nums.size();
 	int res = 0;
 	for (int i = 0; i < k; i++) {
@@ -267,7 +267,7 @@ double Solution::findMaxAverage(vector<int>& nums, int k){
 	}
 	int total = res;
 	for (int i = k; i < n; i++) {
-		total = total- nums[i - k] + nums[i];			///滑动窗口
+		total = total - nums[i - k] + nums[i];			///滑动窗口
 		res = max(res, total);
 	}
 	cout << res << endl;
@@ -279,9 +279,9 @@ double Solution::findMaxAverage(vector<int>& nums, int k){
  * @brief 题目：645. 错误的集合
  * @url:https://leetcode.cn/problems/set-mismatch/
  * @param nums
- * @return 
+ * @return
  */
-vector<int> Solution:: findErrorNums(vector<int>& nums) {
+vector<int> Solution::findErrorNums(vector<int>& nums) {
 	/*map<int, int>mp;
 	vector<int>res;
 	for (int i = 0; i < nums.size(); i++) {
@@ -346,13 +346,13 @@ vector<int> Solution:: findErrorNums(vector<int>& nums) {
  * @brief 题目：661. 图片平滑器
  * @url:https://leetcode.cn/problems/image-smoother/
  * @param img
- * @return 
+ * @return
  */
-vector<vector<int>> Solution::imageSmoother(vector<vector<int>>& img){
+vector<vector<int>> Solution::imageSmoother(vector<vector<int>>& img) {
 
 	int m = img.size();
 	int n = img.front().size();
-	vector<vector<int>>res (m,vector<int>(n));
+	vector<vector<int>>res(m, vector<int>(n));
 	for (int i = 0; i < m; i++) {
 		for (int j = 0; j < n; j++) {
 			int sum = 0;
@@ -376,9 +376,9 @@ vector<vector<int>> Solution::imageSmoother(vector<vector<int>>& img){
  * @brief 题目：674. 最长连续递增序列
  * @url:https://leetcode.cn/problems/longest-continuous-increasing-subsequence/
  * @param nums
- * @return 
+ * @return
  */
-int Solution::findLengthOfLCIS(vector<int>& nums){
+int Solution::findLengthOfLCIS(vector<int>& nums) {
 	vector<int> vec;
 	int res = numeric_limits<int>::min();
 	for (auto item : nums) {
@@ -398,15 +398,16 @@ int Solution::findLengthOfLCIS(vector<int>& nums){
  * @brief 题目：682. 棒球比赛
  * @url:https://leetcode.cn/problems/baseball-game/
  * @param operations
- * @return 
+ * @return
  */
 int Solution::calPoints(vector<string>& operations) {
 	vector<int> res;
 	int total = 0;
 	for (auto opt : operations) {
 		if (opt == "+") {
-			res.push_back(*(res.end()-1) + *(res.end() - 2));
-		}else if(opt=="C") {
+			res.push_back(*(res.end() - 1) + *(res.end() - 2));
+		}
+		else if (opt == "C") {
 			res.pop_back();
 		}
 		else if (opt == "D") {
@@ -426,9 +427,9 @@ int Solution::calPoints(vector<string>& operations) {
  * @brief 题目：697. 数组的度
  * @url:https://leetcode.cn/problems/degree-of-an-array/
  * @param nums
- * @return 
+ * @return
  */
-int Solution::findShortestSubArray(vector<int>& nums){
+int Solution::findShortestSubArray(vector<int>& nums) {
 	map<int, int>mp;
 	for (auto num : nums) {
 		mp[num]++;
@@ -448,10 +449,10 @@ int Solution::findShortestSubArray(vector<int>& nums){
 	}
 	int res = numeric_limits<int>::max();
 	for (auto item : target) {
-		for(auto iter=nums.end()-1;iter!=nums.begin();iter--){
+		for (auto iter = nums.end() - 1; iter != nums.begin(); iter--) {
 			if (*iter == item) {
 				int distance = iter - find(nums.begin(), nums.end(), item);
-				res = min(res, distance+1);
+				res = min(res, distance + 1);
 				break;
 			}
 		}
@@ -461,26 +462,314 @@ int Solution::findShortestSubArray(vector<int>& nums){
 
 	/* 官方参考，写法优秀
 	unordered_map<int, vector<int>> mp;
-        int n = nums.size();
-        for (int i = 0; i < n; i++) {
-            if (mp.count(nums[i])) {
-                mp[nums[i]][0]++;
-                mp[nums[i]][2] = i;
-            } else {
-                mp[nums[i]] = {1, i, i};
-            }
-        }
-        int maxNum = 0, minLen = 0;
-        for (auto& [_, vec] : mp) {
-            if (maxNum < vec[0]) {
-                maxNum = vec[0];
-                minLen = vec[2] - vec[1] + 1;
-            } else if (maxNum == vec[0]) {
-                if (minLen > vec[2] - vec[1] + 1) {
-                    minLen = vec[2] - vec[1] + 1;
-                }
-            }
-        }
-        return minLen;
+		int n = nums.size();
+		for (int i = 0; i < n; i++) {
+			if (mp.count(nums[i])) {
+				mp[nums[i]][0]++;
+				mp[nums[i]][2] = i;
+			} else {
+				mp[nums[i]] = {1, i, i};
+			}
+		}
+		int maxNum = 0, minLen = 0;
+		for (auto& [_, vec] : mp) {
+			if (maxNum < vec[0]) {
+				maxNum = vec[0];
+				minLen = vec[2] - vec[1] + 1;
+			} else if (maxNum == vec[0]) {
+				if (minLen > vec[2] - vec[1] + 1) {
+					minLen = vec[2] - vec[1] + 1;
+				}
+			}
+		}
+		return minLen;
 	*/
 }
+
+/**704. 二分查找
+
+ * @brief 题目：
+ * @url:https://leetcode.cn/problems/binary-search/
+ * @param nums
+ * @param target
+ * @return
+ */
+int Solution::search(vector<int>& nums, int target) {
+	int left = 0, right = nums.size();
+	while (left != right) {
+		int mid = (left + right) / 2;
+		if (nums[mid] < target) {
+			left = mid + 1;
+		}
+		else if (nums[mid] > target) {
+			right = mid;
+		}
+		else {
+			return mid;
+		}
+	}
+	return -1;
+
+
+	/*
+	int left = 0, right = nums.size()-1;
+	while (left <= right) {
+		int mid = (left + right) / 2;
+		if (nums[mid]<target) {
+			left = mid + 1;
+		}
+		else if(nums[mid]>target) {
+			right = mid-1;
+		}
+		else {
+			return mid;
+		}
+	}
+	return -1;
+	*/
+}
+/**
+ * @brief 题目：717. 1 比特与 2 比特字符
+ * @url:https://leetcode.cn/problems/1-bit-and-2-bit-characters/
+ * @param bits
+ * @return
+ */
+bool Solution::isOneBitCharacter(vector<int>& bits) {
+	int n = bits.size();
+	int i = 0;
+	while (i < n - 1) {
+		/*if (bits[i] == 1) {
+			i = i + 2;
+		}
+		else {
+			i = i + 1;
+		}*/
+		i += bits[i] + 1;
+	}
+	return i == n - 1;
+}
+
+/**
+ * @brief 题目：724. 寻找数组的中心下标
+ * @url:https://leetcode.cn/problems/find-pivot-index/
+ * @param nums
+ * @return
+ */
+int Solution::pivotIndex(vector<int>& nums) {
+	int left_sum = 0;
+	int right_sum = 0;
+	for (auto iter = nums.begin() + 1; iter != nums.end(); iter++) {
+		right_sum += *iter;
+	}
+	for (int i = 0; i < nums.size(); i++) {
+		if (left_sum == right_sum) {
+			return i;
+		}
+		if (i == nums.size() - 1) {
+			return -1;
+		}
+		left_sum += nums[i];
+		right_sum -= nums[i + 1];
+	}
+}
+
+/**
+ * @brief 题目：733. 图像渲染
+ * @url:https://leetcode.cn/problems/flood-fill/
+ * @param image
+ * @param sr
+ * @param sc
+ * @param color
+ * @return
+ */
+vector<vector<int>> Solution::floodFill(vector<vector<int>>& image, int sr, int sc, int color) {
+	int n = image.size();
+	int m = image.front().size();
+	int target = image[sr][sc];
+	vector<pair<int, int>>vec;
+	//vector<vector<int>>flag(n, vector<int>(m, 0));
+	vec.push_back({ sr,sc });
+	if (target == color) {
+		return image;
+	}
+	while (!vec.empty())										//广度优先搜索
+	{
+		int row = vec.front().first;
+		int col = vec.front().second;
+		if (row - 1 >= 0 && image[row - 1][col] == target) {
+			vec.push_back({ row - 1,col });
+			//flag[row - 1][col] = 1;
+			image[row - 1][col] = color;
+		}
+		if (row + 1 < n && image[row + 1][col] == target) {
+			vec.push_back({ row + 1,col });
+			//flag[row + 1][col] = 1;
+			image[row + 1][col] = color;
+		}
+		if (col - 1 >= 0 && image[row][col - 1] == target) {
+			vec.push_back({ row ,col - 1 });
+			//flag[row][col - 1] = 1;
+			image[row][col - 1] = color;
+		}
+		if (col + 1 < m && image[row][col + 1] == target) {
+			vec.push_back({ row,col + 1 });
+			//flag[row][col + 1] = 1;
+			image[row][col + 1] = color;
+		}
+		vec.erase(vec.begin());
+	}
+	image[sr][sc] = color;
+	return image;
+
+
+
+	//写法优化，取一个格子的上下左右方位：其中(x,y)为中心格子的坐标,一次对应下，右，左，上四个方位的格子。
+	/*
+	const int dx[4] = {1, 0, 0, -1};
+	const int dy[4] = { 0, 1, -1, 0 };
+	for (int i = 0; i < 4; i++) {
+		int mx = x + dx[i], my = y + dy[i];
+		if (mx >= 0 && mx < n && my >= 0 && my < m && image[mx][my] == currColor) {
+			image[mx][my] = color;
+		}
+	}*/
+
+
+
+}
+
+/**
+ * @brief 题目：744. 寻找比目标字母大的最小字母
+ * @url:https://leetcode.cn/problems/find-smallest-letter-greater-than-target/
+ * @param letters
+ * @param target
+ * @return
+ */
+char Solution::nextGreatestLetter(vector<char>& letters, char target) {
+	for (auto c : letters) {			//线性查找
+		if (target < c) {
+			return c;
+		}
+	}
+	return letters[0];
+
+	/*
+	二分查找
+	return target < letters.back() ? *upper_bound(letters.begin(), letters.end() - 1, target) : letters[0];
+	*/
+}
+
+/**
+ * @brief 题目：746. 使用最小花费爬楼梯
+ * @url:https://leetcode.cn/problems/min-cost-climbing-stairs/
+ * @param cost
+ * @return
+ */
+int Solution::minCostClimbingStairs(vector<int>& cost) {
+	/*
+	初次初拥动态规划：
+	1.定义dp[]数组,其中dp[i]表示到达第i个阶梯需要的最小花费。
+	2.求动态方程（递推表达式）：dp[i]=min(dp[i-1]+cost[i-1],dp[i-2]+cost[i-2])由题目可知，第i个阶梯的最小花费由前一个阶梯或者前两个阶梯及其所需的花费可以推出。
+	3.初始化dp数组。有递推表达式可知，需要初始化的值为dp[0]和dp[1]。由题目可知，可以从第一阶梯或者第二阶梯出发，即dp[0],dp[1]均为0;
+	4.求目标值
+	*/
+
+	vector<int>dp(cost.size() + 1);
+	dp[0] = 0;
+	dp[1] = 0;
+	for (int i = 2; i < dp.size(); i++) {
+		dp[i] = min(dp[i - 1] + cost[i - 1], dp[i - 2] + cost[i - 2]);
+	}
+	return dp[cost.size()];
+}
+
+/**
+ * @brief 题目：747. 至少是其他数字两倍的最大数
+ * @url:https://leetcode.cn/problems/largest-number-at-least-twice-of-others/
+ * @param nums
+ * @return
+ */
+int Solution::dominantIndex(vector<int>& nums) {
+	/*int n = nums.size();
+	if (n == 1) {
+		return 0;
+	}
+	map<int, int> mp;
+	for (int i = 0; i < n; i++) {
+		mp[nums[i]] = i;
+	}
+	sort(nums.begin(), nums.end());
+	if (nums[n - 1] >= nums[n - 2] * 2) {
+		return mp[nums[n - 1]];
+	}
+	return -1;*/
+
+	//实际只要找到最大的值，以及第二大的值就可以，通过线性遍历
+	int n = nums.size();
+	pair<int, int> first_num = { 0,0 };
+	pair<int, int> second_num = { 0,0 };
+	for (int i = 0; i < n; i++) {
+		if (nums[i] > first_num.first) {
+			second_num = first_num;
+			first_num.first = nums[i];
+			first_num.second = i;
+		}
+		else {
+			if (nums[i] > second_num.first) {
+				second_num.first = nums[i];
+				second_num.second = i;
+			}
+		}
+	}
+	if (first_num.first >= second_num.first * 2) {
+		return first_num.second;
+	}
+	return -1;
+
+
+}
+
+/**
+ * @brief 题目：748. 最短补全词
+ * @url:https://leetcode.cn/problems/shortest-completing-word/
+ * @param licensePlate
+ * @param words
+ * @return 
+ */
+string Solution::shortestCompletingWord(string licensePlate, vector<string>& words) {
+	int n = words.size();
+	map<char, int>mp;
+	for (auto ch : licensePlate) {
+		if (isalpha(ch)) {
+			mp[tolower(ch)]++;
+		}
+	}
+	int i = 0;
+	string s(1001, 0);
+	for (; i < n; i++) {
+		map<char, int> mp2;
+		for (auto ch : words[i]) {
+			if (isalpha(ch)) {
+				mp2[tolower(ch)]++;
+			}
+		}
+		if (mp2.size() < mp.size()) {
+			continue;
+		}
+		bool flag = true;
+		for (auto entry : mp) {
+			if (mp2.count(entry.first) == 0 || mp2[entry.first] < entry.second) {
+				flag = false;
+				break;
+			}
+		}
+		if (flag) {
+			s = s.length() <= words[i].length() ? s : words[i];
+		}
+	}
+	return s;
+}
+
+
+
+

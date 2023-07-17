@@ -14,6 +14,7 @@
 #include<string>
 #include<unordered_set>
 #include<numeric>
+#include<list>
 using namespace std;
 class Solution {
 public:
@@ -46,4 +47,120 @@ public:
     int calPoints(vector<string>& operations);
 
     int findShortestSubArray(vector<int>& nums);
+
+    int search(vector<int>& nums, int target);
+
+    bool isOneBitCharacter(vector<int>& bits);
+
+    int pivotIndex(vector<int>& nums);
+
+    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color);
+
+    char nextGreatestLetter(vector<char>& letters, char target);
+
+    int minCostClimbingStairs(vector<int>& cost);
+
+    int dominantIndex(vector<int>& nums);
+
+    string shortestCompletingWord(string licensePlate, vector<string>& words);
+};
+
+/**
+ * @brief 题目：705. 设计哈希集合
+ * @url:https://leetcode.cn/problems/design-hashset/
+ * .
+ */
+class MyHashSet {
+public:
+    int base = 997;
+    vector<list<int>> vec= std::vector<std::list<int>>(base, std::list<int>());     //类的成员变量不能使用括号初始化方法，可以使用列表初始化或者在构造函数中使用括号初始化
+    int hash(int key) {
+        return key % base;
+    }
+    MyHashSet(){
+    }
+
+    void add(int key) {
+        int index = hash(key);
+        for (auto iter = vec[index].begin(); iter != vec[index].end(); iter++) {
+            if (*iter == key) {
+                return;
+            }
+        }
+        vec[index].push_back(key);
+    }
+
+    void remove(int key) {
+        int index = hash(key);
+        for (auto iter = vec[index].begin(); iter != vec[index].end(); iter++) {
+            if (*iter == key) {
+                vec[index].erase(iter);
+                return;
+            }
+        }
+    }
+
+    bool contains(int key) {
+        int index = hash(key);
+        for (auto iter = vec[index].begin(); iter != vec[index].end(); iter++) {
+            if (*iter == key) {
+                return true;
+            }
+        }
+        return false;
+    }
+};
+
+
+struct myentry      //等价于c++数据结构pair<int,int> ,pair用于表示单个键值对
+{
+    int key;
+    int val;
+};
+
+/**
+ * @brief 题目：705. 设计哈希集合
+ * @url:https://leetcode.cn/problems/design-hashmap/
+ */
+class MyHashMap {
+public:
+    int base = 997;
+    vector<list<myentry>> vec = std::vector<std::list<myentry>>(base, std::list<myentry>());
+    int hash(int key) {
+        return key % base;
+    }
+    MyHashMap() {
+
+    }
+
+    void put(int key, int value) {
+        int index = hash(key);
+        for (auto iter = vec[index].begin(); iter != vec[index].end(); iter++) {
+            if ((*iter).key==key) {
+                (*iter).val = value;
+                return;
+            }
+        }
+        vec[index].push_back({ key,value });
+    }
+
+    int get(int key) {
+        int index = hash(key);
+        for (auto iter = vec[index].begin(); iter != vec[index].end(); iter++) {
+            if ((*iter).key == key) {
+                return (*iter).val;
+            }
+        }
+        return -1;
+    }
+
+    void remove(int key) {
+        int index = hash(key);
+        for (auto iter = vec[index].begin(); iter != vec[index].end(); iter++) {
+            if ((*iter).key == key) {
+                vec[index].erase(iter);
+                return;
+            }
+        }
+    }
 };
