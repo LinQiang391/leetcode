@@ -16,6 +16,8 @@
 #include<numeric>
 #include<list>
 using namespace std;
+
+int gcd(int a, int b);
 class Solution {
 public:
     vector<string> findRelativeRanks(vector<int>& score);
@@ -63,6 +65,159 @@ public:
     int dominantIndex(vector<int>& nums);
 
     string shortestCompletingWord(string licensePlate, vector<string>& words);
+
+    bool isToeplitzMatrix(vector<vector<int>>& matrix);
+
+    int uniqueMorseRepresentations(vector<string>& words);
+
+    vector<int> numberOfLines(vector<int>& widths, string s);
+
+    double largestTriangleArea(vector<vector<int>>& points);
+
+    vector<int> shortestToChar(string s, char c);
+
+    vector<vector<int>> flipAndInvertImage(vector<vector<int>>& image);
+
+    vector<vector<int>> transpose(vector<vector<int>>& matrix);
+
+    int projectionArea(vector<vector<int>>& grid);
+
+    vector<int> fairCandySwap(vector<int>& aliceSizes, vector<int>& bobSizes);
+
+    int surfaceArea(vector<vector<int>>& grid);
+
+    bool isMonotonic(vector<int>& nums);
+
+    vector<int> sortArrayByParity(vector<int>& nums);
+
+    int smallestRangeI(vector<int>& nums, int k);
+
+    bool hasGroupsSizeX(vector<int>& deck);
+
+    vector<int> sortArrayByParityII(vector<int>& nums);
+
+    int numUniqueEmails(vector<string>& emails);
+
+    bool validMountainArray(vector<int>& arr);
+
+    vector<int> diStringMatch(string s);
+
+    int minDeletionSize(vector<string>& strs);
+
+    bool isAlienSorted(vector<string>& words, string order);
+
+    int repeatedNTimes(vector<int>& nums);
+
+    int largestPerimeter(vector<int>& nums);
+
+    vector<int> addToArrayForm(vector<int>& num, int k);
+
+    int findJudge(int n, vector<vector<int>>& trust);
+
+    int numRookCaptures(vector<vector<char>>& board);
+
+    vector<string> commonChars(vector<string>& words);
+
+    int largestSumAfterKNegations(vector<int>& nums, int k);
+
+    bool canThreePartsEqualSum(vector<int>& arr);
+
+    vector<bool> prefixesDivBy5(vector<int>& nums);
+
+    vector<vector<int>> allCellsDistOrder(int rows, int cols, int rCenter, int cCenter);
+
+    bool isBoomerang(vector<vector<int>>& points);
+
+    int lastStoneWeight(vector<int>& stones);
+
+    int heightChecker(vector<int>& heights);
+
+    void duplicateZeros(vector<int>& arr);
+
+    vector<int> relativeSortArray(vector<int>& arr1, vector<int>& arr2);
+
+    int numEquivDominoPairs(vector<vector<int>>& dominoes);
+
+    int countCharacters(vector<string>& words, string chars);
+
+    int distanceBetweenBusStops(vector<int>& distance, int start, int destination);
+
+    vector<vector<int>> minimumAbsDifference(vector<int>& arr);
+
+    bool uniqueOccurrences(vector<int>& arr);
+
+    int minCostToMoveChips(vector<int>& position);
+
+    bool checkStraightLine(vector<vector<int>>& coordinates);
+
+    int oddCells(int m, int n, vector<vector<int>>& indices);
+
+
+    vector<vector<int>> shiftGrid(vector<vector<int>>& grid, int k);
+
+    int minTimeToVisitAllPoints(vector<vector<int>>& points);
+
+    string tictactoe(vector<vector<int>>& moves);
+
+    int findSpecialInteger(vector<int>& arr);
+
+    int findNumbers(vector<int>& nums);
+
+    vector<int> replaceElements(vector<int>& arr);
+
+    vector<int> sumZero(int n);
+
+    vector<int> decompressRLElist(vector<int>& nums);
+
+    vector<int> arrayRankTransform(vector<int>& arr);
+
+    vector<int> kWeakestRows(vector<vector<int>>& mat, int k);
+
+    bool checkIfExist(vector<int>& arr);
+  
+    int countNegatives(vector<vector<int>>& grid);
+
+
+    vector<int> sortByBits(vector<int>& arr);
+
+    vector<int> smallerNumbersThanCurrent(vector<int>& nums);
+
+    int findTheDistanceValue(vector<int>& arr1, vector<int>& arr2, int d);
+
+    vector<int> luckyNumbers(vector<vector<int>>& matrix);
+
+    vector<int> createTargetArray(vector<int>& nums, vector<int>& index);
+
+    int findLucky(vector<int>& arr);
+
+    vector<int> minSubsequence(vector<int>& nums);
+
+    vector<string> stringMatching(vector<string>& words);
+
+    int minStartValue(vector<int>& nums);
+
+    vector<bool> kidsWithCandies(vector<int>& candies, int extraCandies);
+
+    bool kLengthApart(vector<int>& nums, int k);
+
+
+    int busyStudent(vector<int>& startTime, vector<int>& endTime, int queryTime);
+
+    bool canBeEqual(vector<int>& target, vector<int>& arr);
+
+    int maxProduct(vector<int>& nums);
+
+    vector<int> shuffle(vector<int>& nums, int n);
+
+    vector<int> finalPrices(vector<int>& prices);
+
+    vector<int> runningSum(vector<int>& nums);
+
+    int numIdenticalPairs(vector<int>& nums);
+
+    int countGoodTriplets(vector<int>& arr, int a, int b, int c);
+
+    int findKthPositive(vector<int>& arr, int k);
 };
 
 /**
@@ -164,3 +319,5 @@ public:
         }
     }
 };
+
+
