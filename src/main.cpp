@@ -19,13 +19,26 @@ void main() {
 	vector<int> t1 = { 3,7,9 };
 	vector<int>t2 = { 3,7,11 };
 	s.findKthPositive(t, 5);*/
-	LinkedList L;
-	L.AddNode(Node(1));
-	L.AddNode(Node(2));
-	L.AddNode(Node(3));
-	//L.InsertNodeAfter(Node(4), 3);
-	L.InsertNode(Node(4), 4);
-	L.InsertNode(Node(5), 5);
-	L.DeleteNode(5);
-	L.PrintLinkedList();
+	//LinkedList L;
+	//L.AddNode(Node(1));
+	//L.AddNode(Node(2));
+	//L.AddNode(Node(3));
+	////L.InsertNodeAfter(Node(4), 3);
+	//L.InsertNode(Node(4), 4);
+	//L.InsertNode(Node(5), 5);
+	//L.DeleteNode(5);
+	//L.PrintLinkedList();
+	BinarySearchTree bst = BinarySearchTree();
+	bst.Put(5);
+	bst.Put(8);
+	bst.Put(4);
+	bst.Put(2);
+	bst.Put(3);
+	/*bst.PreorderPrint();
+	bst.InorderPrint();
+	bst.PostorderPrint();*/
+	bst.DeletNode(5);
+	bst.InorderPrint();
+	bst.PostorderPrint();
+	std::cout << bst.PrintMin() << std::endl;
 }
