@@ -28,17 +28,22 @@ void main() {
 	//L.InsertNode(Node(5), 5);
 	//L.DeleteNode(5);
 	//L.PrintLinkedList();
-	BinarySearchTree bst = BinarySearchTree();
-	bst.Put(5);
-	bst.Put(8);
-	bst.Put(4);
-	bst.Put(2);
-	bst.Put(3);
-	/*bst.PreorderPrint();
-	bst.InorderPrint();
-	bst.PostorderPrint();*/
-	bst.DeletNode(5);
-	bst.InorderPrint();
-	bst.PostorderPrint();
-	std::cout << bst.PrintMin() << std::endl;
+	//BinarySearchTree bst = BinarySearchTree();
+	//bst.Put(3);
+	//bst.Put(2);
+	//bst.Put(4);
+	///*bst.Put(2);
+	//bst.Put(3);*/
+	///*bst.PreorderPrint();
+	//bst.InorderPrint();
+	//bst.PostorderPrint();*/
+	////bst.DeletNode(5);
+	//bst.InorderPrint();
+	//bst.PostorderPrint();
+	//std::cout << bst.PrintMin() << std::endl;
+	AVLTree tree;
+	tree.Put(3);
+	tree.Put(2);
+	tree.Put(3);
+	std::cout<<"hell"<<std::endl;
 }

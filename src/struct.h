@@ -163,11 +163,22 @@ public:
 
 private:
 	void Put(TreeNode*& proot,int val) {
-		if (proot->left == nullptr && val < proot->val) {
+		/*if (proot->left == nullptr && val < proot->val) {
 			proot->left = new TreeNode(val);
 		}
 		else if (proot->right == nullptr && val > proot->val) {
 			proot->right = new TreeNode(val);
+		}
+		else {
+			if (val > proot->val) {
+				Put(proot->right, val);
+			}
+			else {
+				Put(proot->left, val);
+			}
+		}*/
+		if (proot == nullptr) {
+			proot = new TreeNode(val);
 		}
 		else {
 			if (val > proot->val) {
@@ -299,4 +310,59 @@ private:
 	}
 	TreeNode* root = nullptr;
 	int size = 0;
+};
+
+
+
+struct AVLTreeNode{
+	//typedef AVLTreeNode* pAVLTreeNode;
+	int val;
+	AVLTreeNode* left;
+	AVLTreeNode* right;
+	int height;
+	AVLTreeNode(int value) :
+		val(value),
+		left(nullptr),
+		right(nullptr),
+		height(0) {}
+};
+
+
+class AVLTree{
+public:
+	AVLTree(){}
+	~AVLTree(){}
+
+	void Put(int val) {
+		Put(root,val);
+	}
+
+private:
+	void Put(AVLTreeNode*& proot, int val) {
+		if (proot == nullptr) {
+			proot = new AVLTreeNode(val);
+		}
+		else {
+			if (val > proot->val) {
+				Put(proot->right, val);
+			}
+			else {
+				Put(proot->left, val);
+			}
+		}
+
+
+		int hl = GetHeight(proot->left);
+		int hr = GetHeight(proot->right);
+		proot->height=1 + max(hl, hr);
+	}
+
+	int GetHeight(const AVLTreeNode* proot) {
+		if (proot == nullptr) {
+			return 0;
+		}
+		return proot->height;
+	}
+
+	AVLTreeNode* root=nullptr;
 };
