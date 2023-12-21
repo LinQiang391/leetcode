@@ -3,14 +3,14 @@
 struct Node {
 	int val;
 	Node* next;
-	Node(int value):val(value),next(nullptr){}
+	Node(int value) :val(value), next(nullptr) {}
 };
 
-class LinkedList{
+class LinkedList {
 
 public:
-	LinkedList(){}
-	~LinkedList(){
+	LinkedList() {}
+	~LinkedList() {
 		Node* cur = head.next;
 		while (cur != nullptr) {
 			Node* pnode = cur->next;
@@ -36,7 +36,7 @@ public:
 		}
 	}
 	void InsertNode(Node node, int index) {
-		if (index > size + 1||index==0) {
+		if (index > size + 1 || index == 0) {
 			std::cout << "insert failed, out of range" << std::endl;
 			return;
 		}
@@ -92,7 +92,7 @@ public:
 
 	void PrintLinkedList() {
 		Node* cur = head.next;
-		while (cur!=nullptr)
+		while (cur != nullptr)
 		{
 			std::cout << cur->val << " ";
 			cur = cur->next;
@@ -105,7 +105,7 @@ public:
 	}
 
 private:
-	Node head= { 0 };		//空节点，便于后续节点的插入和删除操作。
+	Node head = { 0 };		//空节点，便于后续节点的插入和删除操作。
 	int size = 0;
 };
 
@@ -115,10 +115,10 @@ struct TreeNode
 	int val;
 	TreeNode* left;
 	TreeNode* right;
-	TreeNode(int value):
-	val(value),
-	left(nullptr),
-	right(nullptr){}
+	TreeNode(int value) :
+		val(value),
+		left(nullptr),
+		right(nullptr) {}
 };
 
 class BinarySearchTree {
@@ -143,18 +143,18 @@ public:
 		std::cout << std::endl;
 	}
 
-	void InorderPrint(){
+	void InorderPrint() {
 		InorderPrint(root);
 		std::cout << std::endl;
 	}
 
-	void PostorderPrint(){
+	void PostorderPrint() {
 		PostorderPrint(root);
 		std::cout << std::endl;
 	}
 
 	void DeletNode(int val) {
-		root=DeleteNode(root, val);
+		root = DeleteNode(root, val);
 	}
 
 	int PrintMin() {
@@ -162,7 +162,7 @@ public:
 	}
 
 private:
-	void Put(TreeNode*& proot,int val) {
+	void Put(TreeNode*& proot, int val) {
 		/*if (proot->left == nullptr && val < proot->val) {
 			proot->left = new TreeNode(val);
 		}
@@ -189,7 +189,7 @@ private:
 			}
 		}
 	}
-	void PreorderPrint(TreeNode*& proot){
+	void PreorderPrint(TreeNode*& proot) {
 		if (proot == nullptr) {
 			return;
 		}
@@ -197,7 +197,7 @@ private:
 		PreorderPrint(proot->left);
 		PreorderPrint(proot->right);
 	}
-	void InorderPrint(TreeNode*& proot){
+	void InorderPrint(TreeNode*& proot) {
 		if (proot == nullptr) {
 			return;
 		}
@@ -205,7 +205,7 @@ private:
 		std::cout << proot->val << " ";
 		InorderPrint(proot->right);
 	}
-	void PostorderPrint(TreeNode*& proot){
+	void PostorderPrint(TreeNode*& proot) {
 		if (proot == nullptr) {
 			return;
 		}
@@ -228,7 +228,7 @@ private:
 		delete proot;
 		size--;
 		proot = nullptr;*/
-		if (proot!=nullptr) {
+		if (proot != nullptr) {
 			Destory(proot->left);
 			Destory(proot->right);
 			std::cout << "delete node, val:" << proot->val << std::endl;
@@ -291,22 +291,24 @@ private:
 			return NULL;
 		}
 		if (proot->left != nullptr) {
-			TreeNode minNode=minTreeNode(proot->left);
+			TreeNode minNode = minTreeNode(proot->left);
 			return minNode;
 		}
 		return *proot;
 	}
 
 	void DeleteMinNode(TreeNode*& proot) {
-		if (proot==nullptr) {
+		if (proot == nullptr) {
 			return;
 		}
 		if (proot->left != nullptr) {
 			DeleteMinNode(proot->left);
 		}
-		delete proot;
-		proot = nullptr;
-		size--;
+		else {
+			delete proot;
+			proot = nullptr;
+			size--;
+		}
 	}
 	TreeNode* root = nullptr;
 	int size = 0;
@@ -314,7 +316,7 @@ private:
 
 
 
-struct AVLTreeNode{
+struct AVLTreeNode {
 	//typedef AVLTreeNode* pAVLTreeNode;
 	int val;
 	AVLTreeNode* left;
@@ -327,16 +329,16 @@ struct AVLTreeNode{
 		height(0) {}
 };
 
-
-class AVLTree{
+//平衡因子：左子树的高度-右子树的高度
+class AVLTree {
 public:
-	AVLTree(){}
-	~AVLTree(){
+	AVLTree() {}
+	~AVLTree() {
 		Destory(root);
 	}
 
 	void Put(int val) {
-		Put(root,val);
+		Put(root, val);
 	}
 	void Delete(int val) {
 		Delete(root, val);
@@ -350,6 +352,11 @@ public:
 	int GetSize() {
 		return size;
 	}
+
+	bool IsBanlanced() {
+		return IsBanlanced(root);
+	}
+
 private:
 	void Put(AVLTreeNode*& proot, int val) {
 		if (proot == nullptr) {
@@ -361,13 +368,11 @@ private:
 				Put(proot->right, val);
 				if (GetHeight(proot->right) - GetHeight(proot->left) > 1) {
 
-					if (val < proot->right->val) {
-						//std::cout << "RL" << std::endl;
-						RL(proot);
+					if (GetHeight(proot->right->right) - GetHeight(proot->right->left) == 1) {
+						RR(proot);
 					}
 					else {
-						//std::cout << "RR" << std::endl;
-						RR(proot);
+						RL(proot);
 					}
 				}
 			}
@@ -375,13 +380,11 @@ private:
 				Put(proot->left, val);
 				if (GetHeight(proot->left) - GetHeight(proot->right) > 1) {
 
-					if (val > proot->left->val) {
-						//std::cout << "LR" << std::endl;
-						LR(proot);
+					if (GetHeight(proot->left->left) - GetHeight(proot->left->right) == 1) {
+						LL(proot);
 					}
 					else {
-						//std::cout << "LL" << std::endl;
-						LL(proot);
+						LR(proot);
 					}
 				}
 			}
@@ -390,30 +393,63 @@ private:
 
 		int hl = GetHeight(proot->left);
 		int hr = GetHeight(proot->right);
-		proot->height=1 + max(hl, hr);
+		proot->height = 1 + max(hl, hr);
 	}
 
 
 	AVLTreeNode* Delete(AVLTreeNode*& proot, int val) {
 		if (proot == nullptr) {
 			std::cout << "value is not in tree" << std::endl;
+			return nullptr;
 		}
 
 		if (val > proot->val) {
 			proot->right = Delete(proot->right, val);
+			proot->height = std::max(GetHeight(proot->left), GetHeight(proot->right)) + 1;
+			//平衡因子2：
+			if (GetHeight(proot->left) - GetHeight(proot->right) > 1) {
 
-			{
+				if (GetHeight(proot->left->left) - GetHeight(proot->left->right) == 1) {
+					LL(proot);
+				}
+				else {
+					LR(proot);
+				}
+			}
+			else if (GetHeight(proot->right) - GetHeight(proot->left) > 1) {
 
+				if (GetHeight(proot->right->right) - GetHeight(proot->right->left) == 1) {
+					RR(proot);
+				}
+				else {
+					RL(proot);
+				}
 			}
 		}
-		else if(val < proot->val) {
+		else if (val < proot->val) {
 			proot->left = Delete(proot->left, val);
-			{
+			proot->height = std::max(GetHeight(proot->left), GetHeight(proot->right)) + 1;
+			if (GetHeight(proot->left) - GetHeight(proot->right) > 1) {
 
+				if (GetHeight(proot->left->left) - GetHeight(proot->left->right) == 1) {
+					LL(proot);
+				}
+				else {
+					LR(proot);
+				}
+			}
+			else if (GetHeight(proot->right) - GetHeight(proot->left) > 1) {
+
+				if (GetHeight(proot->right->right) - GetHeight(proot->right->left) == 1) {
+					RR(proot);
+				}
+				else {
+					RL(proot);
+				}
 			}
 		}
 		else {
-			if (proot->left == nullptr && root->right == nullptr) {
+			if (proot->left == nullptr && proot->right == nullptr) {
 				std::cout << "delete val：" << val << std::endl;
 				delete proot;
 				size--;
@@ -427,7 +463,7 @@ private:
 				size--;
 				return tmp;
 			}
-			else if(proot->right==nullptr){
+			else if (proot->right == nullptr) {
 				std::cout << "delete val: " << val << std::endl;
 				AVLTreeNode* tmp = proot->left;
 				delete proot;
@@ -436,13 +472,14 @@ private:
 			}
 			else {
 				//AVLTreeNode tmp = minTreeNode(proot);
-				proot->val = minTreeNode(proot).val;
-				DeleteMinNode(proot);
+				std::cout << "delete val：" << val << std::endl;
+				proot->val = minTreeNode(proot->right).val;
+				DeleteMinNode(proot->right);
 				return proot;//height?
 			}
 		}
 
-
+		return proot;
 	}
 
 	int GetHeight(const AVLTreeNode* proot) {
@@ -527,7 +564,7 @@ private:
 		if (proot != nullptr) {
 			Destory(proot->left);
 			Destory(proot->right);
-			std::cout << "delete node, val:" << proot->val << std::endl;
+			//std::cout << "delete node, val:" << proot->val << std::endl;
 			delete proot;
 			size--;
 			proot = nullptr;
@@ -552,11 +589,23 @@ private:
 		if (proot->left != nullptr) {
 			DeleteMinNode(proot->left);
 		}
-		delete proot;
-		proot = nullptr;
-		size--;
+		else {
+			delete proot;
+			proot = nullptr;
+			size--;
+		}
 	}
 
-	AVLTreeNode* root=nullptr;
+	bool IsBanlanced(AVLTreeNode*& proot) {
+		if (proot == nullptr) {
+			return true;
+		}
+		if (std::abs(GetHeight(proot->left) - GetHeight(proot->right)) > 1) {
+			return false;
+		}
+		return IsBanlanced(proot->left) && IsBanlanced(proot->right);
+	}
+
+	AVLTreeNode* root = nullptr;
 	int size = 0;
 };
