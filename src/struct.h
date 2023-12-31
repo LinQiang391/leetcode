@@ -387,11 +387,6 @@ public:
 		}
 	}
 
-	void PrintBinaryTree() {
-		PrintTree(root, 0, "");
-	}
-
-
 	void LevelPrint() {
 		AVLTreeNode* tmp = root;
 		std::queue<AVLTreeNode*> q;
@@ -621,27 +616,6 @@ private:
 		return IsBanlanced(proot->left) && IsBanlanced(proot->right);
 	}
 
-
-	void PrintTree(AVLTreeNode* root, int level, std::string prefix) {
-		if (root == nullptr) {
-			return;
-		}
-
-		std::cout << prefix;
-		std::cout << "|__";
-
-		// Print the value of the current node
-		std::cout << root->val << std::endl;
-
-		// Create a prefix for the children nodes
-		std::string childPrefix = prefix + "|";
-
-		// Recursively print the right subtree with an appropriate prefix
-		PrintTree(root->right, level + 1, childPrefix + "\\   ");
-
-		// Recursively print the left subtree with an appropriate prefix
-		PrintTree(root->left, level + 1, childPrefix + "/   ");
-	}
 
 	AVLTreeNode* root = nullptr;
 	int size = 0;
